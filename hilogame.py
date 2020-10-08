@@ -1,41 +1,8 @@
-import random
+from hiloModule import *
 
 playerMoney = 100
 prompt = "ยินดีต้อนรับสู่ Hi-Lo เกม\nนายเลือก H หรือ L เพื่อพนัดในอัตรา 1 ต่อ 1\nถ้าลูกเต๋าออก 11 เจ้ามือชนะ\nเริ่มต้นนายจะมีทุนอยู่ 100 บาท เงินหมดเกมหยุด"
-quitMessage = "\nเลือก Q เมื่อต้องการออกจากเกม "
 
-def diceRoll():
-    diceFaces = range(1,7)
-    return random.choice(diceFaces)
-
-def gambleResule(pMoney, gMoney, gChoice, fDice,sDice,thDice):
-    dicesPoint = firstDice+secondDice+thirdDice
-    if dicesPoint > 11:
-        print(f"ลูกเต๋าออกมาเป็น {fDice}-{sDice}-{thDice}. รวมเป็น {dicesPoint}")
-        print("ออก สูง***")
-        if gChoice == 'H':
-            print("นาย ชนะ!!!")
-            pMoney += int(gMoney)
-            return pMoney
-        else:
-            print("นาย แพ้!!!")
-            pMoney -= int(gMoney)
-            return pMoney            
-    elif dicesPoint < 11:
-        print(f"ลูกเต๋าออกมาเป็น {fDice}-{sDice}-{thDice}. รวมเป็น {dicesPoint}")
-        print("ออก ต่ำ***")
-        if gChoice == 'L':
-            print("นาย ชนะ!!!")
-            pMoney += int(gMoney)
-            return pMoney
-        else:
-            print("นาย แพ้!!!")
-            pMoney -= int(gMoney)
-            return pMoney   
-    else:
-        print("ออก ไฮโล 11 แต้ม เจ้ามือกินเรียบ นายแพ้***!!!")
-        pMoney -= int(gMoney)
-        return pMoney
 
 while playerMoney > 0:
     print(prompt)

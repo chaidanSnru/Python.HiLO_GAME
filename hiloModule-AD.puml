@@ -1,27 +1,13 @@
 @startuml
-start
-partition mainGame {
-:import random;
-
-:playerMoney = 100;
-:prompt = "ยินดีต้อนรับสู่ Hi-Lo เกม\nนายเลือก H หรือ L เพื่อพนัดในอัตรา 1 ต่อ 1\nถ้าลูกเต๋าออก 11 เจ้ามือชนะ\nเริ่มต้นนายจะมีทุนอยู่ 100 บาท เงินหมดเกมหยุด";
-:quitMessage = "\nเลือก Q เมื่อต้องการออกจากเกม ";
-while (playerMoney > 0) is (yes)
-    :print(prompt);
-    :print(f"ตอนนี้นายมีเงินอยู่ {playerMoney} บาท");
-    :gambleMoney = input("นายต้องการแทงกี่บาท ? ");
-    :gambleChoice = input("นายจะแทง สูง(H) หรือ ต่ำ(L) ? ");
-    :print(f"ได้เลยยเพื่อน! นายแทงมา {gambleMoney} บาท และเลือก {gambleChoice} ซินะ, มา มา เขย่ากัน...");
-endwhile
-}
-end
-
 partition def_diceRoll(): {
+    start
     :diceFaces = range(1,7);
     :return random.choice(diceFaces);
+    end
 } 
 
 partition def_gambleResule(pMoney_gMoney_gChoice_fDice_sDice_thDice): {
+    start
     :dicesPoint = firstDice+secondDice+thirdDice;
     if (dicesPoint > 11:) then (yes)
         :print(f"ลูกเต๋าออกมาเป็น {fDice}-{sDice}-{thDice}. รวมเป็น {dicesPoint}");
@@ -47,6 +33,11 @@ partition def_gambleResule(pMoney_gMoney_gChoice_fDice_sDice_thDice): {
             :pMoney -= int(gMoney);
             :return pMoney;  
         endif
+    else
+        :print("ออก ไฮโล 11 แต้ม เจ้ามือกินเรียบ นายแพ้***!!!");
+        :pMoney -= int(gMoney);
+        :return pMoney;
     endif
+    end
 }
 @enduml
